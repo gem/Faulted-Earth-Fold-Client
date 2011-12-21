@@ -1,8 +1,8 @@
 /*
- * @requires FaultedEarth.js
+ * @requires Folds.js
  */
 
-FaultedEarth.SourceForm = Ext.extend(gxp.plugins.Tool, {
+Folds.SourceForm = Ext.extend(gxp.plugins.Tool, {
     
     ptype: "app_sourceform",
     
@@ -34,7 +34,7 @@ FaultedEarth.SourceForm = Ext.extend(gxp.plugins.Tool, {
     autoActivate: false,
     
     init: function(target) {
-        FaultedEarth.SourceForm.superclass.init.apply(this, arguments);
+        Folds.SourceForm.superclass.init.apply(this, arguments);
         
         this.sessionFids = [];
         var featureManager = target.tools[this.featureManager];
@@ -65,7 +65,7 @@ FaultedEarth.SourceForm = Ext.extend(gxp.plugins.Tool, {
     },
     
     addOutput: function(config) {
-        return FaultedEarth.SourceForm.superclass.addOutput.call(this, {
+        return Folds.SourceForm.superclass.addOutput.call(this, {
             xtype: "form",
             labelWidth: 110,
             defaults: {
@@ -93,7 +93,7 @@ FaultedEarth.SourceForm = Ext.extend(gxp.plugins.Tool, {
     },
     
     activate: function() {
-        if (FaultedEarth.SourceForm.superclass.activate.apply(this, arguments)) {
+        if (Folds.SourceForm.superclass.activate.apply(this, arguments)) {
             var featureManager = this.target.tools[this.featureManager];
             featureManager.setLayer();
             if (!this.layerRecord) {
@@ -137,7 +137,7 @@ FaultedEarth.SourceForm = Ext.extend(gxp.plugins.Tool, {
     },
     
     deactivate: function() {
-        if (FaultedEarth.SourceForm.superclass.deactivate.apply(this, arguments)) {
+        if (Folds.SourceForm.superclass.deactivate.apply(this, arguments)) {
             this.target.tools[this.featureManager].featureStore.un("save", this.monitorSave, this);
         }
     },
@@ -249,4 +249,4 @@ FaultedEarth.SourceForm = Ext.extend(gxp.plugins.Tool, {
     
 });
 
-Ext.preg(FaultedEarth.SourceForm.prototype.ptype, FaultedEarth.SourceForm);
+Ext.preg(Folds.SourceForm.prototype.ptype, Folds.SourceForm);

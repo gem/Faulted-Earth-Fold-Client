@@ -1,8 +1,8 @@
 /*
- * @requires FaultedEarth.js
+ * @requires Folds.js
  */
 
-FaultedEarth.TraceForm = Ext.extend(gxp.plugins.Tool, {
+Folds.TraceForm = Ext.extend(gxp.plugins.Tool, {
     
     ptype: "app_traceform",
     
@@ -34,7 +34,7 @@ FaultedEarth.TraceForm = Ext.extend(gxp.plugins.Tool, {
     autoActivate: false,
     
     init: function(target) {
-        FaultedEarth.TraceForm.superclass.init.apply(this, arguments);
+        Folds.TraceForm.superclass.init.apply(this, arguments);
         
         this.sessionTids = [];
         this.faultSection = {};
@@ -66,7 +66,7 @@ FaultedEarth.TraceForm = Ext.extend(gxp.plugins.Tool, {
     },
     
     addOutput: function(config) {
-        return FaultedEarth.TraceForm.superclass.addOutput.call(this, {
+        return Folds.TraceForm.superclass.addOutput.call(this, {
             xtype: "form",
             labelWidth: 110,
             defaults: {
@@ -166,7 +166,7 @@ FaultedEarth.TraceForm = Ext.extend(gxp.plugins.Tool, {
     },
 
     activate: function() {
-        if (FaultedEarth.TraceForm.superclass.activate.apply(this, arguments)) {
+        if (Folds.TraceForm.superclass.activate.apply(this, arguments)) {
             var featureManager = this.target.tools[this.featureManager];
             featureManager.setLayer();
             if (!this.layerRecord) {
@@ -210,7 +210,7 @@ FaultedEarth.TraceForm = Ext.extend(gxp.plugins.Tool, {
     },
     
     deactivate: function() {
-        if (FaultedEarth.TraceForm.superclass.deactivate.apply(this, arguments)) {
+        if (Folds.TraceForm.superclass.deactivate.apply(this, arguments)) {
             this.target.tools[this.featureManager].featureStore.un("save", this.monitorSave, this);
         }
     },
@@ -322,4 +322,4 @@ FaultedEarth.TraceForm = Ext.extend(gxp.plugins.Tool, {
     
 });
 
-Ext.preg(FaultedEarth.TraceForm.prototype.ptype, FaultedEarth.TraceForm);
+Ext.preg(Folds.TraceForm.prototype.ptype, Folds.TraceForm);
