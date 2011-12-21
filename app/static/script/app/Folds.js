@@ -135,11 +135,11 @@ Folds = Ext.extend(gxp.Viewer, {
                         title: "Layers"
                     }, {
                         id: 'trace',
-                        title: "Trace Form",
+                        title: "Fold Spatial Data Form",
                         padding: 10
                     }, {
                 		id: 'summary',
-                		title: "Neotectonic Section Summary",
+                		title: "Neotectonic Fold Summary",
                 		padding: 10
                 	}, {
                         id: 'site',
@@ -147,7 +147,7 @@ Folds = Ext.extend(gxp.Viewer, {
                         padding: 10
                     }, {
                 		id: "simple_geometry",
-                		title: "Neotectonic Fault Form"
+                		title: "Blind Fault Form"
                     }, {
                     	id: "source",
                     	title: "Fault Source"
