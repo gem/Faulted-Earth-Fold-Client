@@ -1,8 +1,8 @@
 /*
- * @requires FaultedEarth.js
+ * @requires Folds.js
  */
 
-FaultedEarth.Observations = Ext.extend(gxp.plugins.Tool, {
+Folds.Observations = Ext.extend(gxp.plugins.Tool, {
     
     ptype: "app_observations",
     
@@ -57,7 +57,7 @@ FaultedEarth.Observations = Ext.extend(gxp.plugins.Tool, {
             type: OpenLayers.Filter.Comparison.EQUAL_TO
         });
 
-        FaultedEarth.Observations.superclass.init.apply(this, arguments);
+        Folds.Observations.superclass.init.apply(this, arguments);
     },
     
     addOutput: function(config) {
@@ -67,7 +67,7 @@ FaultedEarth.Observations = Ext.extend(gxp.plugins.Tool, {
             cmp.body.setWidth(cmp.ownerCt.getWidth());
         }
 
-        return FaultedEarth.Observations.superclass.addOutput.call(this, {
+        return Folds.Observations.superclass.addOutput.call(this, {
             renderHidden: true,
             items: [{
                 xtype: "box",
@@ -137,7 +137,7 @@ FaultedEarth.Observations = Ext.extend(gxp.plugins.Tool, {
     },
     
     activate: function() {
-        if (FaultedEarth.Observations.superclass.activate.apply(this, arguments)) {
+        if (Folds.Observations.superclass.activate.apply(this, arguments)) {
             var featureManager = this.target.tools[this.featureManager];
             featureManager.setLayer();
             if (!this.layerRecord) {
@@ -175,7 +175,7 @@ FaultedEarth.Observations = Ext.extend(gxp.plugins.Tool, {
     },
     
     deactivate: function() {
-        if (FaultedEarth.Observations.superclass.deactivate.apply(this, arguments)) {
+        if (Folds.Observations.superclass.deactivate.apply(this, arguments)) {
             this.output[0].ownerCt.disable();
         }
     },
@@ -238,4 +238,4 @@ FaultedEarth.Observations = Ext.extend(gxp.plugins.Tool, {
     
 });
 
-Ext.preg(FaultedEarth.Observations.prototype.ptype, FaultedEarth.Observations);
+Ext.preg(Folds.Observations.prototype.ptype, Folds.Observations);

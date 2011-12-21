@@ -1,8 +1,8 @@
 /*
- * @requires FaultedEarth.js
+ * @requires Folds.js
  */
 
-FaultedEarth.SummaryForm = Ext.extend(gxp.plugins.Tool, {
+Folds.SummaryForm = Ext.extend(gxp.plugins.Tool, {
     
     ptype: "app_summaryform",
     
@@ -34,7 +34,7 @@ FaultedEarth.SummaryForm = Ext.extend(gxp.plugins.Tool, {
     autoActivate: false,
     
     init: function(target) {
-        FaultedEarth.SummaryForm.superclass.init.apply(this, arguments);
+        Folds.SummaryForm.superclass.init.apply(this, arguments);
         
         this.sessionFids = [];
         this.fault= {};
@@ -60,7 +60,7 @@ FaultedEarth.SummaryForm = Ext.extend(gxp.plugins.Tool, {
     },
     
     addOutput: function(config) {
-        return FaultedEarth.SummaryForm.superclass.addOutput.call(this, {
+        return Folds.SummaryForm.superclass.addOutput.call(this, {
             xtype: "form",
             labelWidth: 110,
             defaults: {
@@ -142,7 +142,7 @@ FaultedEarth.SummaryForm = Ext.extend(gxp.plugins.Tool, {
         }
     },
     activate: function() {
-        if (FaultedEarth.SummaryForm.superclass.activate.apply(this, arguments)) {
+        if (Folds.SummaryForm.superclass.activate.apply(this, arguments)) {
             var featureManager = this.target.tools[this.featureManager];
             featureManager.setLayer();
             if (!this.layerRecord) {
@@ -186,7 +186,7 @@ FaultedEarth.SummaryForm = Ext.extend(gxp.plugins.Tool, {
     },
     
     deactivate: function() {
-        if (FaultedEarth.SummaryForm.superclass.deactivate.apply(this, arguments)) {
+        if (Folds.SummaryForm.superclass.deactivate.apply(this, arguments)) {
             this.target.tools[this.featureManager].featureStore.un("save", this.monitorSave, this);
         }
     },
@@ -298,4 +298,4 @@ FaultedEarth.SummaryForm = Ext.extend(gxp.plugins.Tool, {
     
 });
 
-Ext.preg(FaultedEarth.SummaryForm.prototype.ptype, FaultedEarth.SummaryForm);
+Ext.preg(Folds.SummaryForm.prototype.ptype, Folds.SummaryForm);
