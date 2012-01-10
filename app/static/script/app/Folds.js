@@ -134,7 +134,7 @@ Folds = Ext.extend(gxp.Viewer, {
                         id: "tree",
                         title: "Layers"
                     }, {
-                        id: 'trace',
+                        id: 'foldtrace',
                         title: "Fold Spatial Data Form",
                         padding: 10
                     }, {
@@ -225,16 +225,16 @@ Folds = Ext.extend(gxp.Viewer, {
                     propertyNames: propertyNames
                 }
             }, {
-                ptype: "app_traceform",
-                id: "traceform",
+                ptype: "app_foldtraceform",
+                id: "foldtraceform",
                 featureManager: "featuremanager",
                 featureEditor: "featureeditor",
-                outputTarget: "trace"
+                outputTarget: "foldtrace"
             }, {
                 ptype: "gxp_featureeditor",
                 id: "featureeditor",
                 featureManager: "featuremanager",
-                actionTarget: "traceform_tooltarget",
+                actionTarget: "foldtraceform_tooltarget",
                 autoLoadFeatures: true,
                 createFeatureActionText: "Draw",
                 editFeatureActionText: "Modify",
