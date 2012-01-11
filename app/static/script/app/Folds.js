@@ -207,8 +207,8 @@ Folds = Ext.extend(gxp.Viewer, {
                     multiple: true,
                 }
             }, {
-                ptype: "app_summaryform",
-                id: "summaryform",
+                ptype: "app_foldsummaryform",
+                id: "foldsummaryform",
                 featureManager: "featuremanager",
                 featureEditor: "featureeditor",
                 outputTarget: "summary"
@@ -217,7 +217,7 @@ Folds = Ext.extend(gxp.Viewer, {
                 id: "featureeditor",
                 featureManager: "featuremanager",
                 modifyOnly: true,
-                actionTarget: "summaryform_tooltarget",
+                actionTarget: "foldsummaryform_tooltarget",
                 //createFeatureActionText: "Draw",
                 editFeatureActionText: "Modify",
 				snappingAgent: "snapping-agent",
