@@ -52,7 +52,7 @@ Folds.FoldSummaryForm = Ext.extend(gxp.plugins.Tool, {
             "featureunselected": function(e) {
                 if (this.active && featureManager.layerRecord.get("name") == "geonode:fold_section_view") {
                     this.sessionFids = [];
-                    this.target.summaryId = null;
+                    this.target.foldsummaryId = null;
                 }
             },
             scope: this
@@ -171,8 +171,8 @@ Folds.FoldSummaryForm = Ext.extend(gxp.plugins.Tool, {
                         }
                     },
                     "load": function() {
-                        this.target.summaryId && window.setTimeout((function() {
-                            var feature = mgr.featureLayer.getFeatureByFid(this.target.summaryId);
+                        this.target.foldsummaryId && window.setTimeout((function() {
+                            var feature = mgr.featureLayer.getFeatureByFid(this.target.foldsummaryId);
                             if (feature && feature.layer.selectedFeatures.indexOf(feature) == -1) {
                                 feature.layer.selectedFeatures.push(feature);
                                 feature.layer.events.triggerEvent("featureselected", {feature: feature});
