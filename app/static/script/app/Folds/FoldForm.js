@@ -2,9 +2,9 @@
  * @requires Folds.js
  */
 
-Folds.SimpleGeometryForm = Ext.extend(gxp.plugins.Tool, {
+Folds.FoldForm = Ext.extend(gxp.plugins.Tool, {
     
-    ptype: "app_simplegeometryform",
+    ptype: "app_foldform",
     
     /** api: config[featureManager]
      *  ``String`` id of the FeatureManager to add uploaded features to
@@ -34,7 +34,7 @@ Folds.SimpleGeometryForm = Ext.extend(gxp.plugins.Tool, {
     autoActivate: false,
     
     init: function(target) {
-        Folds.SimpleGeometryForm.superclass.init.apply(this, arguments);
+        Folds.FoldForm.superclass.init.apply(this, arguments);
         
         this.sessionFids = [];
         var featureManager = target.tools[this.featureManager];
@@ -43,12 +43,12 @@ Folds.SimpleGeometryForm = Ext.extend(gxp.plugins.Tool, {
                 if (!e.feature.fid) {
                     return;
                 }
-                if (featureManager.layerRecord.get("name") == "geonode:observations_fault") {
+                if (featureManager.layerRecord.get("name") == "geonode:observations_fold") {
                     this.target.summaryId = e.feature.fid;
                 }
             },
             "featureunselected": function(e) {
-                if (this.active && featureManager.layerRecord.get("name") == "geonode:observations_fault") {
+                if (this.active && featureManager.layerRecord.get("name") == "geonode:observations_fold") {
                     this.target.summaryId = null;
                 }
             },
@@ -57,7 +57,7 @@ Folds.SimpleGeometryForm = Ext.extend(gxp.plugins.Tool, {
     },
     
     addOutput: function(config) {
-        return Folds.SimpleGeometryForm.superclass.addOutput.call(this, {
+        return Folds.FoldForm.superclass.addOutput.call(this, {
             xtype: "form",
             labelWidth: 110,
             defaults: {
@@ -69,12 +69,12 @@ Folds.SimpleGeometryForm = Ext.extend(gxp.plugins.Tool, {
                     tag: "p",
                     cls: "x-form-item"
                 },
-                html: "Select a fault from the grid below, then use the modify button to create a simple geometry that will be used to create a fault source polygon" 
+                html: "Select a fold from the grid below, then use the modify button to create a simple geometry that will be used to create a fault source polygon" 
             },{
                 xtype: "container",
                 layout: "hbox",
                 cls: "composite-wrap",
-                fieldLabel: "Edit a simplified fault geometry",
+                fieldLabel: "Edit a simplified fold geometry",
                 items: [{
                     id: this.id + "_tooltarget",
                     xtype: "container",
@@ -87,7 +87,7 @@ Folds.SimpleGeometryForm = Ext.extend(gxp.plugins.Tool, {
                     tag: "p",
                     cls: "x-form-item"
                 },
-                html: "Once a fault has the required attributes, and simplified geometry, select a fault from the grid and use the 'generate' button to calculate a fault source."
+                html: "Once a fold has the required attributes, and simplified geometry, select a fold from the grid and use the 'generate' button to calculate a fault source."
             }, {
                 xtype: "container",
                 layout: "hbox",
@@ -101,7 +101,7 @@ Folds.SimpleGeometryForm = Ext.extend(gxp.plugins.Tool, {
                         Ext.Ajax.request({
                             method: "PUT",
                             url: this.target.localGeoNodeUrl + this.target.localHostname + '/observations/faultsource/create',
-                            params: Ext.encode({fault_id: this.target.summaryId, name: ''}),
+                            params: Ext.encode({fold_id: this.target.summaryId, name: ''}),
                             success: function(response, opts) {
                                 alert('Fault source generated');
                             },
@@ -130,12 +130,12 @@ Folds.SimpleGeometryForm = Ext.extend(gxp.plugins.Tool, {
     },
     
     activate: function() {
-        if (Folds.SimpleGeometryForm.superclass.activate.apply(this, arguments)) {
+        if (Folds.FoldForm.superclass.activate.apply(this, arguments)) {
             var featureManager = this.target.tools[this.featureManager];
             featureManager.setLayer();
             if (!this.layerRecord) {
                 this.target.createLayerRecord({
-                    name: "geonode:observations_fault",
+                    name: "geonode:observations_fold",
                     source: "local"
                 }, function(record) {
                     this.layerRecord = record;
@@ -174,7 +174,7 @@ Folds.SimpleGeometryForm = Ext.extend(gxp.plugins.Tool, {
     },
     
     deactivate: function() {
-        if (Folds.SimpleGeometryForm.superclass.deactivate.apply(this, arguments)) {
+        if (Folds.FoldForm.superclass.deactivate.apply(this, arguments)) {
             this.target.tools[this.featureManager].featureStore.un("save", this.monitorSave, this);
         }
     },
@@ -286,4 +286,4 @@ Folds.SimpleGeometryForm = Ext.extend(gxp.plugins.Tool, {
     
 });
 
-Ext.preg(Folds.SimpleGeometryForm.prototype.ptype, Folds.SimpleGeometryForm);
+Ext.preg(Folds.FoldForm.prototype.ptype, Folds.FoldForm);

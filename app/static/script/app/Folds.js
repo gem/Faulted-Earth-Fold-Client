@@ -146,7 +146,7 @@ Folds = Ext.extend(gxp.Viewer, {
                         title: "Site Observation Form",
                         padding: 10
                     }, {
-                		id: "simple_geometry",
+                		id: "fold",
                 		title: "Blind Fault Form"
                     }, {
                     	id: "source",
@@ -261,17 +261,17 @@ Folds = Ext.extend(gxp.Viewer, {
                     propertyNames: propertyNames
                 }
             }, {
-                ptype: "app_simplegeometryform",
+                ptype: "app_foldform",
                 id: "simplegeometryform",
                 featureManager: "featuremanager",
                 featureEditor: "featureeditor",
-                outputTarget: "simple_geometry"
+                outputTarget: "fold"
             }, {
                 ptype: "gxp_featureeditor",
                 id: "featureeditor",
                 featureManager: "featuremanager",
                 modifyOnly: true,
-                actionTarget: "simplegeometryform_tooltarget",
+                actionTarget: "foldform_tooltarget",
                 editFeatureActionText: "Modify",
 		        snappingAgent: "snapping-agent",
 		        autoLoadFeatures: true,
