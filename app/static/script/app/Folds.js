@@ -134,20 +134,20 @@ Folds = Ext.extend(gxp.Viewer, {
                         id: "tree",
                         title: "Layers"
                     }, {
-                        id: 'trace',
-                        title: "Trace Form",
+                        id: 'foldtrace',
+                        title: "Fold Spatial Data Form",
                         padding: 10
                     }, {
                 		id: 'summary',
-                		title: "Neotectonic Section Summary",
+                		title: "Neotectonic Fold Summary",
                 		padding: 10
                 	}, {
                         id: 'site',
                         title: "Site Observation Form",
                         padding: 10
                     }, {
-                		id: "simple_geometry",
-                		title: "Neotectonic Fault Form"
+                		id: "fold",
+                		title: "Blind Fault Form"
                     }, {
                     	id: "source",
                     	title: "Fault Source"
@@ -207,8 +207,8 @@ Folds = Ext.extend(gxp.Viewer, {
                     multiple: true,
                 }
             }, {
-                ptype: "app_summaryform",
-                id: "summaryform",
+                ptype: "app_foldsummaryform",
+                id: "foldsummaryform",
                 featureManager: "featuremanager",
                 featureEditor: "featureeditor",
                 outputTarget: "summary"
@@ -217,7 +217,7 @@ Folds = Ext.extend(gxp.Viewer, {
                 id: "featureeditor",
                 featureManager: "featuremanager",
                 modifyOnly: true,
-                actionTarget: "summaryform_tooltarget",
+                actionTarget: "foldsummaryform_tooltarget",
                 //createFeatureActionText: "Draw",
                 editFeatureActionText: "Modify",
 				snappingAgent: "snapping-agent",
@@ -225,16 +225,16 @@ Folds = Ext.extend(gxp.Viewer, {
                     propertyNames: propertyNames
                 }
             }, {
-                ptype: "app_traceform",
-                id: "traceform",
+                ptype: "app_foldtraceform",
+                id: "foldtraceform",
                 featureManager: "featuremanager",
                 featureEditor: "featureeditor",
-                outputTarget: "trace"
+                outputTarget: "foldtrace"
             }, {
                 ptype: "gxp_featureeditor",
                 id: "featureeditor",
                 featureManager: "featuremanager",
-                actionTarget: "traceform_tooltarget",
+                actionTarget: "foldtraceform_tooltarget",
                 autoLoadFeatures: true,
                 createFeatureActionText: "Draw",
                 editFeatureActionText: "Modify",
@@ -261,17 +261,17 @@ Folds = Ext.extend(gxp.Viewer, {
                     propertyNames: propertyNames
                 }
             }, {
-                ptype: "app_simplegeometryform",
+                ptype: "app_foldform",
                 id: "simplegeometryform",
                 featureManager: "featuremanager",
                 featureEditor: "featureeditor",
-                outputTarget: "simple_geometry"
+                outputTarget: "fold"
             }, {
                 ptype: "gxp_featureeditor",
                 id: "featureeditor",
                 featureManager: "featuremanager",
                 modifyOnly: true,
-                actionTarget: "simplegeometryform_tooltarget",
+                actionTarget: "foldform_tooltarget",
                 editFeatureActionText: "Modify",
 		        snappingAgent: "snapping-agent",
 		        autoLoadFeatures: true,
