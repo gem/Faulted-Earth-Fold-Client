@@ -2,9 +2,9 @@
  * @requires Folds.js
  */
 
-Folds.TraceForm = Ext.extend(gxp.plugins.Tool, {
+Folds.FoldTraceForm = Ext.extend(gxp.plugins.Tool, {
     
-    ptype: "app_traceform",
+    ptype: "app_foldtraceform",
     
     /** api: config[featureManager]
      *  ``String`` id of the FeatureManager to add uploaded features to
@@ -34,7 +34,7 @@ Folds.TraceForm = Ext.extend(gxp.plugins.Tool, {
     autoActivate: false,
     
     init: function(target) {
-        Folds.TraceForm.superclass.init.apply(this, arguments);
+        Folds.FoldTraceForm.superclass.init.apply(this, arguments);
         
         this.sessionTids = [];
         this.faultSection = {};
@@ -44,21 +44,21 @@ Folds.TraceForm = Ext.extend(gxp.plugins.Tool, {
                 if (!e.feature.fid) {
                     return;
                 }
-                if (featureManager.layerRecord.get("name") == "geonode:observations_trace") {
-                    this.target.traceId = e.feature.fid;
+                if (featureManager.layerRecord.get("name") == "geonode:observations_foldtrace") {
+                    this.target.foldtraceId = e.feature.fid;
 
-                    this.current_trace_url = "/observations/traces/join";
-                    this.sessionTids.push(this.target.traceId);
+                    this.current_foldtrace_url = "/observations/foldtraces/join";
+                    this.sessionTids.push(this.target.foldtraceId);
 
-                } else if (this.target.traceId) {
+                } else if (this.target.foldtraceId) {
                     this.output[0].ownerCt.enable();
-                    this.current_trace_url = "/traces/new/trace_id/" + this.target.traceId.split(".").pop()
+                    this.current_foldtrace_url = "/foldtraces/new/foldtrace_id/" + this.target.foldtraceId.split(".").pop()
                 }
             },
             "featureunselected": function(e) {
-                if (this.active && featureManager.layerRecord.get("name") == "geonode:observations_trace") {
+                if (this.active && featureManager.layerRecord.get("name") == "geonode:observations_foldtrace") {
                     this.sessionTids = [];
-                    this.target.traceId = null;
+                    this.target.foldtraceId = null;
                 }
             },
             scope: this
@@ -66,7 +66,7 @@ Folds.TraceForm = Ext.extend(gxp.plugins.Tool, {
     },
     
     addOutput: function(config) {
-        return Folds.TraceForm.superclass.addOutput.call(this, {
+        return Folds.FoldTraceForm.superclass.addOutput.call(this, {
             xtype: "form",
             labelWidth: 110,
             defaults: {
@@ -128,7 +128,7 @@ Folds.TraceForm = Ext.extend(gxp.plugins.Tool, {
                         this.sessionTids.push(this.faultSection);
                         Ext.Ajax.request({
                             method: "PUT",
-                            url: this.target.localGeoNodeUrl + this.target.localHostname + this.current_trace_url,
+                            url: this.target.localGeoNodeUrl + this.target.localHostname + this.current_foldtrace_url,
                             params: Ext.encode(this.sessionTids),
                             success: function(response, opts) {
                                 alert('Fault Section created');
@@ -166,12 +166,12 @@ Folds.TraceForm = Ext.extend(gxp.plugins.Tool, {
     },
 
     activate: function() {
-        if (Folds.TraceForm.superclass.activate.apply(this, arguments)) {
+        if (Folds.FoldTraceForm.superclass.activate.apply(this, arguments)) {
             var featureManager = this.target.tools[this.featureManager];
             featureManager.setLayer();
             if (!this.layerRecord) {
                 this.target.createLayerRecord({
-                    name: "geonode:observations_trace",
+                    name: "geonode:observations_foldtrace",
                     source: "local"
                 }, function(record) {
                     this.layerRecord = record;
@@ -195,8 +195,8 @@ Folds.TraceForm = Ext.extend(gxp.plugins.Tool, {
                         }
                     },
                     "load": function() {
-                        this.target.traceId && window.setTimeout((function() {
-                            var feature = mgr.featureLayer.getFeatureByFid(this.target.traceId);
+                        this.target.foldtraceId && window.setTimeout((function() {
+                            var feature = mgr.featureLayer.getFeatureByFid(this.target.foldtraceId);
                             if (feature && feature.layer.selectedFeatures.indexOf(feature) == -1) {
                                 feature.layer.selectedFeatures.push(feature);
                                 feature.layer.events.triggerEvent("featureselected", {feature: feature});
@@ -210,7 +210,7 @@ Folds.TraceForm = Ext.extend(gxp.plugins.Tool, {
     },
     
     deactivate: function() {
-        if (Folds.TraceForm.superclass.deactivate.apply(this, arguments)) {
+        if (Folds.FoldTraceForm.superclass.deactivate.apply(this, arguments)) {
             this.target.tools[this.featureManager].featureStore.un("save", this.monitorSave, this);
         }
     },
@@ -322,4 +322,4 @@ Folds.TraceForm = Ext.extend(gxp.plugins.Tool, {
     
 });
 
-Ext.preg(Folds.TraceForm.prototype.ptype, Folds.TraceForm);
+Ext.preg(Folds.FoldTraceForm.prototype.ptype, Folds.FoldTraceForm);
