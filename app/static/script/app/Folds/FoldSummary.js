@@ -83,37 +83,26 @@ Folds.FoldSummaryForm = Ext.extend(gxp.plugins.Tool, {
                     tag: "p",
                     cls: "x-form-item"
                 },
-                html: "To create a <b>Neotectonic fold,</b> select a record by holding down ctl or shift to select multiple records. Then click join."
+                html: "Once a Neotectonic fold section has the required attributes, create a <b>Blind Fault,</b> by selecting a record in the grid below and use the 'generate' button to calculate a Blind Fault."
             }, {
-                xtype: "textfield",
-                ref: "fold",
-                fieldLabel: "Neotectonic Fault Name",
-                //validationDelay: 500,
-                listeners: {
-                        "valid": this.updateFaultSectionName,
-                        scope: this
-                }
-             }, {
                 xtype: "container",
                 layout: "hbox",
-                fieldLabel: "Join sections",
+                fieldLabel: "Generate Blind Fault",
                 items: [{
                     xtype: "button",
-                    text: "Join",
+                    text: "Generate",
                     iconCls: "icon-layer-switcher",
                     handler: function() {
                         var featureManager = this.target.tools[this.featureManager];
-                        this.sessionFids.push(this.fold);
                         Ext.Ajax.request({
                             method: "PUT",
-                            url: this.target.localGeoNodeUrl + this.target.localHostname + this.current_fold_section_url,
-                            params: Ext.encode(this.sessionFids),
+                            url: this.target.localGeoNodeUrl + this.target.localHostname + '/observations/fold/create',
+                            params: Ext.encode({fold_id: this.target.summaryId, name: ''}),
                             success: function(response, opts) {
-                                alert('Fault created');
-                                this.sessionFids = [];
+                                alert('Blind Fold generated');
                             },
                             failure: function(response, opts){
-                                alert('Failed to create the Fault');
+                                alert('Failed to generate the Blind Fold');
                             },
 
                             scope: this
@@ -122,7 +111,7 @@ Folds.FoldSummaryForm = Ext.extend(gxp.plugins.Tool, {
                     },
                     scope: this
                     }]
-            }],
+             }],
             listeners: {
                 "added": function(cmp, ct) {
                     ct.on({
@@ -135,7 +124,7 @@ Folds.FoldSummaryForm = Ext.extend(gxp.plugins.Tool, {
             }
         });
     },
-    updateFaultSectionName: function() {
+    updateFoldSectionName: function() {
         var form = this.output[0]
         if (form.fold.getValue()) {
                 this.fold['name'] = form.fold.getValue()
